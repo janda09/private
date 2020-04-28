@@ -1,7 +1,7 @@
 #!/bin/bash
 #Script auto create trial user SSH
 #will expired after 1 day
-#modified by Janda Baper
+#Modified by Rizwan Arif Firmansyah
 
 IP=`dig +short myip.opendns.com @resolver1.opendns.com`
 
@@ -17,10 +17,10 @@ echo -e "Host: $IP" | lolcat
 echo -e "Port OpenSSH: 22" | lolcat
 echo -e "Port Dropbear: 143" | lolcat
 echo -e "Port SSL: 443" | lolcat
-echo -e "Port Squid: 8080" | lolcat
+echo -e "Port Squid: 80" | lolcat
 echo -e "Config OpenVPN (TCP 1193): http://$IP:81/client.ovpn" | lolcat
 echo -e "Username: $Login" | lolcat
 echo -e "Password: $Pass\n" | lolcat
 echo -e "=========================" | lolcat
-echo -e "Mod by Janda Baper" | lolcat
+echo -e "Modified by Rizwan Arif Firmansyah" | lolcat
 echo -e ""
