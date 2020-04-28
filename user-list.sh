@@ -15,5 +15,5 @@ JUMLAH="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)
 echo "-------------------------------" | lolcat
 echo "Account number: $JUMLAH user" | lolcat
 echo "-------------------------------" | lolcat
-echo -e "Mod by Janda Baper" | lolcat
+echo -e "Modified by Rizwan Arif Firmansyah" | lolcat
 echo -e ""
