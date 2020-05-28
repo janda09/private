@@ -1,6 +1,6 @@
 # Auto Installer
 
-Script auto installer for VPS Ubuntu 18.04
+Scripts autoinstaller for VPS Ubuntu 18.04
 
 # Installation
 
