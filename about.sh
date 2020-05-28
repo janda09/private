@@ -4,7 +4,7 @@
 clear
 echo -e "Script Auto Install SSH & OpenVPN " | lolcat 
 echo -e ""
-echo -e "For Ubuntu 18.04 32 bit & 64 bit" | lolcat
+echo -e "For Ubuntu 18.04 64 bit" | lolcat
 echo -e "For VPS with KVM and VMWare virtualization" | lolcat
 echo -e ""
 echo -e "Original script by :" | lolcat
