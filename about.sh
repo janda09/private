@@ -23,6 +23,7 @@ echo -e "|  \  | ##| ########| ##\## ##| ##  | ##| ######## "
 echo -e "| ##__| ##| ##  | ##| ## \####| ##__/ ##| ##  | ## "
 echo -e " \##    ##| ##  | ##| ##  \###| ##    ##| ##  | ## "
 echo -e "  \######  \##   \## \##   \## \#######  \##   \## "
-echo -e "                                     Baper Group ™ "
+echo -e "                                     Baper Group ™ " | lolcat
 echo -e ""
 echo -e "jandabaper09@gmail.com" | lolcat
+echo -e ""
