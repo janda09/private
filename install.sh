@@ -100,7 +100,7 @@ wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/janda09/pr
 cd
 wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/janda09/private/master/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/janda09/install/private/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/janda09/private/private/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7500' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
