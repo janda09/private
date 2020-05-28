@@ -15,8 +15,8 @@ echo -e "Host: $IP" | lolcat
 echo -e "Username: $Login " | lolcat
 echo -e "Password: $Pass" | lolcat
 echo -e "Port OpenSSH: 22"  | lolcat
-echo -e "Port Dropbear: 443,990"  | lolcat
-echo -e "Port SSL: 444" | lolcat
+echo -e "Port Dropbear: 143,110,109,456"  | lolcat
+echo -e "Port SSL: 443" | lolcat
 echo -e "Port OpenVPNSSL: 442" | lolcat
 echo -e "Port Squid: 80,8080 (limit to IP SSH)" | lolcat
 echo -e "Config SSL: http://$IP:81/ssl.conf" | lolcat
