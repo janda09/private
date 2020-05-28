@@ -1,7 +1,7 @@
 #!/bin/bash
 #Script auto create trial user SSH
 #will expired after 1 day
-#Modified by Rizwan Arif Firmansyah
+#Modified by Janda Baper Geoup
 
 IP=`dig +short myip.opendns.com @resolver1.opendns.com`
 
