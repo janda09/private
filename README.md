@@ -4,7 +4,7 @@ Script auto installer for VPS Ubuntu 18.04
 
 # Installation
 
-<font color='#0000FF'>wget https://raw.githubusercontent.com/janda09/private/master/install.sh && chmod +x install.sh && ./install.sh</font>
+<font color='#0000FF'>apt-get update && apt-get upgrade -y && wget https://raw.githubusercontent.com/janda09/private/master/install.sh && chmod +x install.sh && ./install.sh</font>
 
 # Open Ports
 
