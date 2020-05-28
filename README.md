@@ -4,7 +4,7 @@ Script auto installer for VPS Ubuntu 18.04
 
 # Installation
 
-wget https://git.io/JfoZM && chmod +x install.sh && ./install.sh
+<font color='#0000FF'>wget https://git.io/JfoZM && chmod +x install.sh && ./install.sh</font>
 
 # Open Ports
 
@@ -15,4 +15,4 @@ wget https://git.io/JfoZM && chmod +x install.sh && ./install.sh
 <br>Badvpn : badvpn-udpgw port 7500
 <br>Nginx : 81
 
-# Type menu to display a list of commands
+# Type <font color='#0000FF'>MENU</font> to display a list of commands
