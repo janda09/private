@@ -3,3 +3,6 @@
 
 clear
 neofetch
+echo -e ""
+echo -e "Ipang Nett Nott"
+echo -e ""
