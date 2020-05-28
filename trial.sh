@@ -22,5 +22,5 @@ echo -e "Config OpenVPN (TCP 1193): http://$IP:81/client.ovpn" | lolcat
 echo -e "Username: $Login" | lolcat
 echo -e "Password: $Pass\n" | lolcat
 echo -e "=========================" | lolcat
-echo -e "Modified by Rizwan Arif Firmansyah" | lolcat
+echo -e "Modified by Janda Baper Group" | lolcat
 echo -e ""
