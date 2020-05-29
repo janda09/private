@@ -102,9 +102,9 @@ wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/janda09/private
 if [ "$OS" == "x86_64" ]; then
   wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/janda09/private/private/badvpn-udpgw64"
 fi
-sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7500' /etc/rc.local
+sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7500
+screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7900
 
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
@@ -255,7 +255,7 @@ echo "OpenSSH  : 22"  | tee -a log-install.txt
 echo "Dropbear : 143, 110, 456, 109"  | tee -a log-install.txt
 echo "SSL      : 443"  | tee -a log-install.txt
 echo "Squid3   : 80, 8080 (limit to IP SSH)"  | tee -a log-install.txt
-echo "badvpn   : badvpn-udpgw port 7500"  | tee -a log-install.txt
+echo "badvpn   : badvpn-udpgw port 7900"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Script"  | tee -a log-install.txt
