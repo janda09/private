@@ -261,7 +261,7 @@ echo "OpenSSH  : 22"  | tee -a log-install.txt
 echo "Dropbear : 143, 110, 456, 109"  | tee -a log-install.txt
 echo "SSL      : 443"  | tee -a log-install.txt
 echo "Squid3   : 80, 8080 (limit to IP SSH)"  | tee -a log-install.txt
-echo "badvpn   : badvpn-udpgw port 7900"  | tee -a log-install.txt
+echo "badvpn   : badvpn-udpgw port 7500"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Script"  | tee -a log-install.txt
