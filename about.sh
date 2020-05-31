@@ -25,5 +25,9 @@ echo -e " \##    ##| ##  | ##| ##  \###| ##    ##| ##  | ## "
 echo -e "  \######  \##   \## \##   \## \#######  \##   \## "
 echo -e "                                     Baper Group ™ " | lolcat
 echo -e ""
-echo -e "jandabaper09@gmail.com" | lolcat
+echo -e "##############################################"
+echo -e "#              Janda Baper Group             #"
+echo -e "#               Ipang Nett Nott              #"
+echo -e "#            jandabaper09@gmail.com          #"
+echo -e "##############################################"
 echo -e ""
