@@ -15,9 +15,9 @@ echo -e ""
 echo -e "====Trial SSH Account====" | lolcat
 echo -e "Host: $IP" | lolcat
 echo -e "Port OpenSSH: 22" | lolcat
-echo -e "Port Dropbear: 143,110,109,456" | lolcat
+echo -e "Port Dropbear: 143,80,443,456" | lolcat
 echo -e "Port SSL: 443" | lolcat
-echo -e "Port Squid: 80" | lolcat
+echo -e "Port Squid: 3128, 8080" | lolcat
 echo -e "Username: $Login" | lolcat
 echo -e "Password: $Pass\n" | lolcat
 echo -e "=========================" | lolcat
