@@ -70,22 +70,31 @@ apt-get -y install nginx
 # install essential package
 apt-get -y install nano iptables-persistent dnsutils screen whois ngrep unzip unrar
 
-echo "clear" >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e "    _____   ______   __    __  _______    ______  "' >> .bashrc
-echo 'echo -e "   |     \ /      \ |  \  |  \|       \  /      \ "' >> .bashrc
-echo 'echo -e "    \#####|  ######\| ##\ | ##| #######\|  ######\ "' >> .bashrc
-echo 'echo -e "      | ##| ##__| ##| ###\| ##| ##  | ##| ##__| ## "' >> .bashrc
-echo 'echo -e " __   | ##| ##    ##| ####\ ##| ##  | ##| ##    ## "' >> .bashrc
-echo 'echo -e "|  \  | ##| ########| ##\## ##| ##  | ##| ######## "' >> .bashrc
-echo 'echo -e "| ##__| ##| ##  | ##| ## \####| ##__/ ##| ##  | ## "' >> .bashrc
-echo 'echo -e " \##    ##| ##  | ##| ##  \###| ##    ##| ##  | ## "' >> .bashrc
-echo 'echo -e "  \######  \##   \## \##   \## \#######  \##   \## "' >> .bashrc
-echo 'echo -e "                                      Baper Group™" | lolcat' >> .bashrc
-echo 'echo -e "welcome to the server $HOSTNAME" | lolcat' >> .bashrc
-echo 'echo -e "Script mod by Janda Baper Group" | lolcat' >> .bashrc
-echo 'echo -e "Type menu to display a list of commands" | lolcat' >> .bashrc
-echo 'echo -e ""' >> .bashrc
+ # Creating a SSH server config using cat eof tricks
+ cat <<'MySSHConfig' > /etc/ssh/sshd_config
+# Mod By Janda Baper Group
+Port 22
+AddressFamily inet
+ListenAddress 0.0.0.0
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+PermitRootLogin yes
+MaxSessions 1024
+PubkeyAuthentication yes
+PasswordAuthentication yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+ClientAliveInterval 240
+ClientAliveCountMax 2
+UseDNS no
+Banner /etc/banner
+AcceptEnv LANG LC_*
+Subsystem   sftp  /usr/lib/openssh/sftp-server
+MySSHConfig
 
 # install webserver
 cd
@@ -105,8 +114,8 @@ mkdir badvpn-build
 cd badvpn-build
 cmake badvpn-1.999.128 -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
 make install
-echo 'badvpn-udpgw --listen-addr 127.0.0.1:7500 > /dev/nul &' >> /etc/rc.local
-badvpn-udpgw --listen-addr 127.0.0.1:7500 > /dev/nul &
+echo 'badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/nul &' >> /etc/rc.local
+badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/nul &
 cd /usr/bin
 wget https://raw.githubusercontent.com/janda09/private/master/badvpn-udpgw
 chmod 755 badvpn-udpgw
@@ -115,11 +124,26 @@ cd
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 
+# install sslh Multi Port
+apt-get install sslh -y
+
+# Konfigurasi sslh
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/janda09/janda/main/repo/sslh"
+
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110 -p 456 -p 109"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80 -p 443 -p 456"/g' /etc/default/dropbear
+
+# update dropbear 2019
+wget https://raw.githubusercontent.com/janda09/janda/main/repo/dropbear-2019.78.tar.bz2
+bzip2 dropbear-2019.78.tar.bz2 | tar xvf -
+cd dropbear-2019.78
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear.old
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
@@ -175,7 +199,8 @@ rm -rf /root/ddos-deflate-master.zip
 
 # banner /etc/bnr
 wget -O /etc/bnr "https://raw.githubusercontent.com/janda09/install/master/bnr"
-sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
+wget -O /etc/banner "https://raw.githubusercontent.com/janda09/install/master/banner"
+sed -i 's@#Banner@Banner /etc/banner@g' /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/bnr"@g' /etc/default/dropbear
 
 # xml parser
@@ -240,10 +265,23 @@ squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
 nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 
 # install neofetch
-echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
 curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
 apt-get update
 apt-get install neofetch
+apt-get install vnstat -y
+
+# Creating Profile Info
+echo 'clear' > /etc/profile.d/janda.sh
+echo 'echo '' > /var/log/syslog' >> /etc/profile.d/janda.sh
+echo 'neofetch ' >> /etc/profile.d/janda.sh
+echo 'echo -e "" ' >> /etc/profile.d/janda.sh
+echo 'echo -e "################################################" ' >> /etc/profile.d/janda.sh
+echo 'echo -e "#               Janda Baper Group              #" ' >> /etc/profile.d/janda.sh
+echo 'echo -e "#                Ipang Nett Nott               #" ' >> /etc/profile.d/janda.sh
+echo 'echo -e "# Ketik menu untuk menampilkan daftar perintah #" ' >> /etc/profile.d/janda.sh
+echo 'echo -e "################################################" ' >> /etc/profile.d/janda.sh
+echo 'echo -e "" ' >> /etc/profile.d/janda.sh
+chmod +x /etc/profile.d/janda.sh
 
 # remove unnecessary files
 apt -y autoremove
@@ -258,9 +296,9 @@ echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
 echo "-------"  | tee -a log-install.txt
 echo "OpenSSH  : 22"  | tee -a log-install.txt
-echo "Dropbear : 143, 110, 456, 109"  | tee -a log-install.txt
+echo "Dropbear : 143, 80, 443, 456"  | tee -a log-install.txt
 echo "SSL      : 443"  | tee -a log-install.txt
-echo "Squid3   : 80, 8080 (limit to IP SSH)"  | tee -a log-install.txt
+echo "Squid3   : 3128, 8080 (limit to IP SSH)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7500"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
