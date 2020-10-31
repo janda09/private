@@ -9,11 +9,10 @@ Scripts autoinstaller for VPS Ubuntu 18.04
 # Open Ports
 
 <br>OpenSSH : 22
-<br>Dropbear : 143, 110, 456, 109
+<br>Dropbear : 143, 80, 443, 456
 <br>SSL : 443
-<br>Squid3 : 80, 8080 (limit to IP SSH)
-<br>Badvpn : badvpn-udpgw port 7900
-<br>Nginx : 81
+<br>Squid3 : 3128, 8080 (limit to IP SSH)
+<br>Badvpn : badvpn-udpgw port 7300
 
 # Type <font color='#0000FF'>MENU</font> to display a list of commands
 
