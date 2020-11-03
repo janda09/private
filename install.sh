@@ -137,16 +137,20 @@ sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80 -p 443 -p 456"/g' /etc/default/dropbear
 
 # update dropbear 2019
+apt install gcc -y
+sudo apt-get install build-essential
+/etc/init.d/dropbear stop
 wget https://raw.githubusercontent.com/janda09/janda/main/repo/dropbear-2019.78.tar.bz2
-bzip2 dropbear-2019.78.tar.bz2 | tar xvf -
+ dropbear-2019.78.tar.bz2
 cd dropbear-2019.78
 ./configure
 make && make install
-mv /usr/sbin/dropbear /usr/sbin/dropbear.old
+mv /usr/sbin/dropbear /usr/sbin/dropbear1
 ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
+cd
 
 # install squid
 apt-get -y install squid
