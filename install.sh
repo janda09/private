@@ -140,9 +140,9 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80 -p 443 -p 456"/g' /etc
 
 sudo apt-get install build-essential
 /etc/init.d/dropbear stop
-wget https://raw.githubusercontent.com/janda09/janda/main/repo/dropbear-2019.78.tar.bz2
-tar xjf dropbear-2019.78.tar.bz2
-cd dropbear-2019.78
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2
+tar xjf dropbear-2020.81.tar.bz2
+cd dropbear-2020.81
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
