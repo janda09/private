@@ -124,17 +124,11 @@ cd
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 
-# install sslh Multi Port
-apt-get install sslh -y
-
-# Konfigurasi sslh
-wget -O /etc/default/sslh "https://raw.githubusercontent.com/janda09/janda/main/repo/sslh"
-
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80 -p 443 -p 456"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80 -p 109 -p 456"/g' /etc/default/dropbear
 
 # update dropbear 2019
 
