@@ -11,6 +11,9 @@ OS=`uname -m`;
 MYIP=$(wget -qO- ipv4.icanhazip.com);
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 
+# change hostname
+hostnamectl set-hostname ipang
+
 # company name details
 country=ID
 state=JATIM
@@ -68,7 +71,7 @@ apt-get update
 apt-get -y install nginx
 
 # install essential package
-apt-get -y install nano iptables-persistent dnsutils screen whois ngrep unzip unrar
+apt-get -y install nano iptables-persistent dnsutils screen whois ngrep unzip
 
  # Creating a SSH server config using cat eof tricks
  cat <<'MySSHConfig' > /etc/ssh/sshd_config
@@ -107,15 +110,15 @@ wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/janda09/pr
 
 # install badvpn
 cd
-apt-get -y install cmake make gcc libc6-dev
+apt-get -y install cmake make gcc libc6-dev zlib1g-dev
 wget https://raw.githubusercontent.com/janda09/private/master/badvpn-1.999.128.tar.bz2
 tar xf badvpn-1.999.128.tar.bz2
 mkdir badvpn-build
 cd badvpn-build
 cmake badvpn-1.999.128 -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
 make install
-echo 'badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/nul &' >> /etc/rc.local
-badvpn-udpgw --listen-addr 127.0.0.1:7300 > /dev/nul &
+echo 'badvpn-udpgw --listen-addr 127.0.0.1:7200 > /dev/nul &' >> /etc/rc.local
+badvpn-udpgw --listen-addr 127.0.0.1:7200 > /dev/nul &
 cd /usr/bin
 wget https://raw.githubusercontent.com/janda09/private/master/badvpn-udpgw
 chmod 755 badvpn-udpgw
@@ -129,6 +132,15 @@ apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 80 -p 109 -p 456"/g' /etc/default/dropbear
+
+#update dropbear 2029
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2020.81.tar.bz2
+bzip2 -cd dropbear-2020.81.tar.bz2 | tar xvf -
+cd dropbear-2020.81
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear1
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
@@ -286,7 +298,7 @@ echo "OpenSSH  : 22"  | tee -a log-install.txt
 echo "Dropbear : 143, 80, 443, 456"  | tee -a log-install.txt
 echo "SSL      : 443"  | tee -a log-install.txt
 echo "Squid3   : 3128, 8080 (limit to IP SSH)"  | tee -a log-install.txt
-echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
+echo "badvpn   : badvpn-udpgw port 7200"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Script"  | tee -a log-install.txt
